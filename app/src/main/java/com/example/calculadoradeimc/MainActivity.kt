@@ -1,6 +1,8 @@
 package com.example.calculadoradeimc
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -66,7 +68,30 @@ class MainActivity : AppCompatActivity() {
         imc.toString()
         resultado.setText("IMC: $imc \n $messages")
 
-
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val inflate = menuInflater
+        inflate.inflate(R.menu.main_menu, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.reset -> {
+                val cleanEditWeight = binding.editPeso
+                val cleanEditHeight = binding.editAltura
+                val cleanMessage = binding.txtMensagem
+
+                cleanEditWeight.setText("")
+                cleanEditHeight.setText("")
+                cleanMessage.setText("")
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 }
