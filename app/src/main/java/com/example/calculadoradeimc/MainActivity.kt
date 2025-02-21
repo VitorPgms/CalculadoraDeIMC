@@ -21,50 +21,50 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val bt_calcular = binding.btnCalcular
-        val mensagem = binding.txtMensagem
+        val btCalculate = binding.btnCalcular
+        val message = binding.txtMensagem
 
-        bt_calcular.setOnClickListener {
-            val editPeso = binding.editPeso.text.toString()
-            val editAltura = binding.editAltura.text.toString()
+        btCalculate.setOnClickListener {
+            val editWeight = binding.editPeso.text.toString()
+            val editHeight = binding.editAltura.text.toString()
 
-            if (editPeso.isEmpty()){
-                mensagem.setText("Informe o seu Peso")
-            }else if (editAltura.isEmpty()){
-                mensagem.setText("Informe a sua Altura")
+            if (editWeight.isEmpty()){
+                message.setText("Informe o seu Peso")
+            }else if (editHeight.isEmpty()){
+                message.setText("Informe a sua Altura")
             }else {
-                CalculoDeImc()
+                bmiCalculation()
             }
         }
 
     }
 
-    private fun CalculoDeImc(){
-        val pesoId = binding.editPeso
-        val alturaId = binding.editAltura
+    private fun bmiCalculation(){
+        val weightId = binding.editPeso
+        val heightId = binding.editAltura
 
-        val peso = Integer.parseInt(pesoId.text.toString())
-        val altura = java.lang.Float.parseFloat(alturaId.text.toString())
+        val weight = Integer.parseInt(weightId.text.toString())
+        val height = java.lang.Float.parseFloat(heightId.text.toString())
         val resultado = binding.txtMensagem
-        val imc = peso / (altura * altura)
+        val imc = weight / (height * height)
 
-        val imcBaixo = 18.5
-        val imcNormal = 24.9
-        val imcSobrepeso = 29.9
-        val imcObesidade1 = 34.9
-        val imcObesidade2 = 39.9
+        val bmiLow = 18.5
+        val bmiNormal = 24.9
+        val bmiOverweight = 29.9
+        val bmiObesity1 = 34.9
+        val bmiObesity2 = 39.9
 
-        val Mensagem = when{
-            imc <= imcBaixo -> "Peso Baixo"
-            imc <= imcNormal -> "Peso Normal"
-            imc <= imcSobrepeso -> "Sobrepeso"
-            imc <= imcObesidade1 -> "Obesidade (Grau 1)"
-            imc <= imcObesidade2 -> "Obesidade (Grau 2)"
-            else -> "Obesidade Mórbida (Grau 3)"
+        val messages = when{
+            imc <= bmiLow -> getString(R.string.bmi_low)
+            imc <= bmiNormal -> getString(R.string.bmi_normal)
+            imc <= bmiOverweight -> getString(R.string.bmi_overweight)
+            imc <= bmiObesity1 -> getString(R.string.bmi_obesety1)
+            imc <= bmiObesity2 -> getString(R.string.bmi_obesety2)
+            else -> getString(R.string.bmi_obesety3)
         }
 
         imc.toString()
-        resultado.setText("IMC: $imc \n $Mensagem")
+        resultado.setText("IMC: $imc \n $messages")
 
 
     }
